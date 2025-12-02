@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  lembrapet-backend:
+    build: ./backend
+    container_name: lembrapet-backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./apk:/app/apk
+      - ./backend/public:/app/public
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - lembrapet-network
+
+networks:
+  lembrapet-network:
+    driver: bridge
