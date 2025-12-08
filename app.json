@@ -8,6 +8,14 @@
       "ios",
       "android",
       "web"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "de437512-5a8e-4d1e-a1fc-a218801625ad"
+      }
+    },
+    "android": {
+      "package": "com.kuma345.lembrapet"
+    }
   }
 }
