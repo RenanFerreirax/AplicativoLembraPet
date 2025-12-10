@@ -2,20 +2,22 @@
   "expo": {
     "name": "Lembra Pet",
     "slug": "lembrapet",
-    "version": "1.0.0",
-    "sdkVersion": "48.0.0",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "version": "1.0.1",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.kuma345.lembrapet"
+    },
+    "android": {
+      "package": "com.kuma345.lembrapet",
+      "versionCode": 2
+    },
+    "plugins": [],
     "extra": {
       "eas": {
         "projectId": "de437512-5a8e-4d1e-a1fc-a218801625ad"
       }
-    },
-    "android": {
-      "package": "com.kuma345.lembrapet"
     }
   }
 }
