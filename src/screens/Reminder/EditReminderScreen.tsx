@@ -12,7 +12,7 @@ import { useReminders } from "../contexts/RemindersContext";
 
 export default function EditReminderScreen({ route, navigation }: any) {
   const { id } = route.params;
-  const { reminders, edit } = useReminders();
+  const { reminders, updateReminder } = useReminders();
 
   const rem = reminders.find((r) => r.id === id);
 
@@ -27,7 +27,7 @@ export default function EditReminderScreen({ route, navigation }: any) {
   const save = () => {
     if (!title) return alert("Informe título");
 
-    edit(id, { title, date, notes });
+    updateReminder(id, { title, date, notes });
 
     navigation.goBack();
   };

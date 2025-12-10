@@ -1,16 +1,10 @@
-export type Category =
-  | 'vacina'
-  | 'medicamento'
-  | 'veterinario'
-  | 'higiene'
-  | 'passeio'
-  | 'alimentacao';
+export type Category = "vacina" | "banho" | "passeio" | "general";
 
-export interface Reminder {
+export type Reminder = {
   id: string;
   title: string;
-  date: string; // ISO
+  date: string;
   category: Category;
-  done: boolean;
   notes?: string;
-}
+  done: boolean; // ✔ Aqui está o campo correto
+};

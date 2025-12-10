@@ -3,116 +3,142 @@ import {
   View,
   Text,
   TextInput,
-  Button,
-  StyleSheet,
   TouchableOpacity,
-  ScrollView,
+  StyleSheet,
 } from "react-native";
-import { Category } from "../../types";
 import { useReminders } from "../contexts/RemindersContext";
+import { Category } from "../../types";
 
 export default function CreateReminderScreen({ navigation }: any) {
   const { add } = useReminders();
 
   const [title, setTitle] = useState("");
-  const [date, setDate] = useState(new Date().toISOString());
-  const [category, setCategory] = useState<Category>("vacina");
+  const [date, setDate] = useState("");
+  const [category, setCategory] = useState<Category>("general");
   const [notes, setNotes] = useState("");
 
-  const save = () => {
-    if (!title) return alert("Informe um título");
+  const handleSave = () => {
+    if (!title.trim()) {
+      alert("Digite um título");
+      return;
+    }
+    if (!date.trim()) {
+      alert("Digite a data e hora");
+      return;
+    }
 
     add({
       title,
       date,
       category,
-      done: false,
       notes,
+      done: false,
     });
 
     navigation.goBack();
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <TouchableOpacity style={styles.backBtn} onPress={() => navigation.goBack()}>
-        <Text style={styles.backText}>◀ Voltar</Text>
-      </TouchableOpacity>
-
-      <Text style={styles.header}>Criar Lembrete</Text>
-
-      <Text style={styles.label}>Título</Text>
-      <TextInput
-        style={styles.input}
-        value={title}
-        onChangeText={setTitle}
-        placeholder="Ex: Vacina de Raiva"
-      />
-
-      <Text style={styles.label}>Data e Hora (ISO)</Text>
-      <TextInput style={styles.input} value={date} onChangeText={setDate} />
-
-      <Text style={styles.label}>Categoria</Text>
-      <View style={styles.row}>
-        {[
-          "vacina",
-          "medicamento",
-          "consulta",
-          "higiene",
-          "passeio",
-          "alimentacao",
-        ].map((c) => (
-          <TouchableOpacity
-            key={c}
-            onPress={() => setCategory(c as Category)}
-            style={[
-              styles.chip,
-              category === c && styles.chipActive,
-            ]}
-          >
-            <Text style={{ textTransform: "capitalize" }}>{c}</Text>
-          </TouchableOpacity>
-        ))}
+    <View style={styles.container}>
+      {/* Topo */}
+      <View style={styles.topbar}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Text style={styles.back}>←</Text>
+        </TouchableOpacity>
+        <Text style={styles.titleTop}>Criar Lembrete</Text>
+        <View style={{ width: 20 }} />
       </View>
 
-      <Text style={styles.label}>Observações</Text>
-      <TextInput
-        style={[styles.input, { height: 100 }]}
-        value={notes}
-        onChangeText={setNotes}
-        placeholder="Notas adicionais"
-        multiline
-      />
+      {/* Conteúdo */}
+      <View style={styles.content}>
+        <Text style={styles.label}>Título</Text>
+        <TextInput
+          placeholder="Ex: Vacina"
+          value={title}
+          onChangeText={setTitle}
+          style={styles.input}
+        />
 
-      <View style={{ marginTop: 20 }}>
-        <Button title="Salvar Lembrete" onPress={save} />
+        <Text style={styles.label}>Data e Hora</Text>
+        <TextInput
+          placeholder="Ex: 21/10/2025 09:00"
+          value={date}
+          onChangeText={setDate}
+          style={styles.input}
+        />
+
+        <Text style={styles.label}>Categoria</Text>
+        <TextInput
+          placeholder="vacina, banho, passeio..."
+          value={category}
+          onChangeText={(text) => setCategory(text as Category)}
+          style={styles.input}
+        />
+
+        <Text style={styles.label}>Observações</Text>
+        <TextInput
+          placeholder="Digite algo opcional..."
+          value={notes}
+          onChangeText={setNotes}
+          style={[styles.input, { height: 80 }]}
+          multiline
+        />
+
+        <TouchableOpacity style={styles.btn} onPress={handleSave}>
+          <Text style={styles.btnText}>Salvar Lembrete</Text>
+        </TouchableOpacity>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
+// ---------- ESTILOS ----------
 const styles = StyleSheet.create({
-  container: {
-    padding: 16,
-    backgroundColor: "#F6F7FB",
-    flexGrow: 1,
+  container: { flex: 1, backgroundColor: "#F6F7FB" },
+
+  topbar: {
+    height: 70,
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 16,
+    justifyContent: "space-between",
+    backgroundColor: "#125C0B",
+    paddingTop: 16,
   },
-  backBtn: { marginBottom: 20 },
-  backText: { color: "#1069F6", fontSize: 16, fontWeight: "600" },
-  header: { fontSize: 20, fontWeight: "700", marginBottom: 12 },
-  label: { marginTop: 8, marginBottom: 4 },
-  input: { backgroundColor: "#fff", padding: 12, borderRadius: 8 },
-  row: { flexDirection: "row", flexWrap: "wrap", marginTop: 8 },
-  chip: {
-    padding: 8,
-    borderRadius: 16,
+
+  back: { fontSize: 26, color: "#fff" },
+
+  titleTop: { color: "#fff", fontSize: 20, fontWeight: "700" },
+
+  content: { padding: 20 },
+
+  label: {
+    fontSize: 14,
+    fontWeight: "600",
+    marginBottom: 4,
+    color: "#333",
+  },
+
+  input: {
+    backgroundColor: "#fff",
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 16,
     borderWidth: 1,
     borderColor: "#DDD",
-    marginRight: 8,
-    marginBottom: 8,
   },
-  chipActive: {
-    backgroundColor: "#EAF2FF",
-    borderColor: "#1069F6",
+
+  btn: {
+    backgroundColor: "#125C0B",
+    paddingVertical: 14,
+    borderRadius: 10,
+    marginTop: 10,
+  },
+
+  btnText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "700",
+    textAlign: "center",
   },
 });
