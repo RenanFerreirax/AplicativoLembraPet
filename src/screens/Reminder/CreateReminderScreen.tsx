@@ -17,7 +17,6 @@ export default function CreateReminderScreen({ navigation }: any) {
   const [category, setCategory] = useState<Category>("general");
   const [notes, setNotes] = useState("");
 
-  // ---------- CORREÇÃO: handleSave seguro ----------
   const handleSave = () => {
     try {
       if (!title.trim()) {
@@ -36,9 +35,9 @@ export default function CreateReminderScreen({ navigation }: any) {
         return;
       }
 
-      if (!add) {
-        alert("Erro: função de adicionar lembrete não encontrada");
-        console.error("add function não existe em useReminders()");
+      if (!add || typeof add !== "function") {
+        console.error("Função add não encontrada no contexto de lembretes.");
+        alert("Erro interno ao salvar o lembrete.");
         return;
       }
 
@@ -51,10 +50,12 @@ export default function CreateReminderScreen({ navigation }: any) {
         done: false,
       });
 
-      navigation.goBack();
+      if (navigation && typeof navigation.goBack === "function") {
+        navigation.goBack();
+      }
     } catch (error) {
       console.error("Erro ao salvar lembrete:", error);
-      alert("Ocorreu um erro ao salvar o lembrete");
+      alert("Ocorreu um erro ao salvar o lembrete.");
     }
   };
 
@@ -112,10 +113,8 @@ export default function CreateReminderScreen({ navigation }: any) {
   );
 }
 
-// ---------- ESTILOS ----------
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#F6F7FB" },
-
   topbar: {
     height: 70,
     flexDirection: "row",
@@ -125,20 +124,10 @@ const styles = StyleSheet.create({
     backgroundColor: "#125C0B",
     paddingTop: 16,
   },
-
   back: { fontSize: 26, color: "#fff" },
-
   titleTop: { color: "#fff", fontSize: 20, fontWeight: "700" },
-
   content: { padding: 20 },
-
-  label: {
-    fontSize: 14,
-    fontWeight: "600",
-    marginBottom: 4,
-    color: "#333",
-  },
-
+  label: { fontSize: 14, fontWeight: "600", marginBottom: 4, color: "#333" },
   input: {
     backgroundColor: "#fff",
     borderRadius: 8,
@@ -147,14 +136,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#DDD",
   },
-
   btn: {
     backgroundColor: "#125C0B",
     paddingVertical: 14,
     borderRadius: 10,
     marginTop: 10,
   },
-
   btnText: {
     color: "#fff",
     fontSize: 16,
