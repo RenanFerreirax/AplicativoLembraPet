@@ -17,25 +17,45 @@ export default function CreateReminderScreen({ navigation }: any) {
   const [category, setCategory] = useState<Category>("general");
   const [notes, setNotes] = useState("");
 
+  // ---------- CORREÇÃO: handleSave seguro ----------
   const handleSave = () => {
-    if (!title.trim()) {
-      alert("Digite um título");
-      return;
-    }
-    if (!date.trim()) {
-      alert("Digite a data e hora");
-      return;
-    }
+    try {
+      if (!title.trim()) {
+        alert("Digite um título");
+        return;
+      }
+      if (!date.trim()) {
+        alert("Digite a data e hora");
+        return;
+      }
 
-    add({
-      title,
-      date,
-      category,
-      notes,
-      done: false,
-    });
+      // Validar categoria
+      const validCategories: Category[] = ["general", "vacina", "banho", "passeio"];
+      if (!validCategories.includes(category)) {
+        alert("Categoria inválida. Use: general, vacina, banho, passeio");
+        return;
+      }
 
-    navigation.goBack();
+      if (!add) {
+        alert("Erro: função de adicionar lembrete não encontrada");
+        console.error("add function não existe em useReminders()");
+        return;
+      }
+
+      // Adicionar lembrete
+      add({
+        title,
+        date,
+        category,
+        notes,
+        done: false,
+      });
+
+      navigation.goBack();
+    } catch (error) {
+      console.error("Erro ao salvar lembrete:", error);
+      alert("Ocorreu um erro ao salvar o lembrete");
+    }
   };
 
   return (
