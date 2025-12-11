@@ -22,11 +22,27 @@ O app funciona localmente usando dados mock, sem backend.
 ### Android (APK)
 - Baixe o APK diretamente ou escaneie o QR code abaixo:
 
-![QR Code Android](https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://expo.dev/accounts/kuma345/projects/lembrapet/builds/92565a6d-b6f8-43ec-9d29-932ed0a21836)
+![QR Code Android](https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://expo.dev/artifacts/eas/4Mun9qHXbfhjdZzSJKtwqk.apk)
 
-[Baixar APK Android](https://expo.dev/accounts/kuma345/projects/lembrapet/builds/92565a6d-b6f8-43ec-9d29-932ed0a21836)
+[Baixar APK Android](https://expo.dev/artifacts/eas/4Mun9qHXbfhjdZzSJKtwqk.apk)
 
 ### iOS (Expo Go)
 - Abra no **Expo Go** ou escaneie o QR code abaixo:
 
-![QR Code iOS](https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://expo.dev/@kum)
+![QR Code iOS](https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://expo.dev/@kuma345/lembrapet)
+
+[Abrir no Expo Go](https://expo.dev/@kuma345/lembrapet)
+
+---
+
+## Tecnologias Utilizadas
+- React Native
+- Expo
+- TypeScript
+- Context API (para gerenciar lembretes, tema e autenticação)
+
+---
+
+## Observações
+- O app não utiliza backend; todos os dados são armazenados localmente.  
+- Funcionalidades principais: criar, editar, remover e concluir lembretes.
