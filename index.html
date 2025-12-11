@@ -28,28 +28,34 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         .app-print {
-            width: 400px;  /* aumento da largura */
-            max-width: 100%;
-            border-radius: 20px;
+            width: 100%;
+            max-width: 800px;  
+            height: auto;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
             box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-            margin: 10px 10px 10px 0;
-        }
-        .prints-container {
-            display: flex;
-            flex-wrap: wrap;
         }
         .qr {
             width: 250px;
             height: 250px;
             margin: 15px 0;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
         a {
             color: #4CAF50;
             text-decoration: none;
             font-weight: bold;
         }
-        p {
+        p, ul {
             line-height: 1.6;
+        }
+        ul {
+            margin-left: 20px;
         }
     </style>
 </head>
@@ -69,10 +75,8 @@
 
     <div class="section">
         <h2>Prints da Aplicação</h2>
-        <div class="prints-container">
-            <img class="app-print" src="prints/tela-inicial.PNG" alt="Tela Inicial com lembretes">
-            <img class="app-print" src="prints/tela-de-criar-lembrete.PNG" alt="Tela de Criar Lembrete">
-        </div>
+        <img class="app-print" src="prints/tela-inicial.PNG" alt="Tela Inicial com lembretes">
+        <img class="app-print" src="prints/tela-de-criar-lembrete.PNG" alt="Tela de Criar Lembrete">
     </div>
 
     <div class="section">
