@@ -5,18 +5,26 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  Alert,
 } from "react-native";
 import { useReminders } from "../contexts/RemindersContext";
 import { Category } from "../../types";
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function CreateReminderScreen({ navigation }: any) {
   const { add } = useReminders();
 
   const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState<Date>(new Date());
+  const [showPicker, setShowPicker] = useState(false);
   const [category, setCategory] = useState<Category>("general");
   const [notes, setNotes] = useState("");
+
+  const showDateTimePicker = () => setShowPicker(true);
+
+  const onChangeDate = (event: any, selectedDate?: Date) => {
+    setShowPicker(false);
+    if (selectedDate) setDate(selectedDate);
+  };
 
   const handleSave = () => {
     try {
@@ -24,19 +32,7 @@ export default function CreateReminderScreen({ navigation }: any) {
         alert("Digite um título");
         return;
       }
-      if (!date.trim()) {
-        alert("Digite a data e hora");
-        return;
-      }
 
-      // Validar formato da data
-      const parsedDate = new Date(date);
-      if (isNaN(parsedDate.getTime())) {
-        alert("Data inválida. Use o formato: dd/MM/yyyy HH:mm");
-        return;
-      }
-
-      // Validar categoria
       const validCategories: Category[] = ["general", "vacina", "banho", "passeio"];
       if (!validCategories.includes(category)) {
         alert("Categoria inválida. Use: general, vacina, banho, passeio");
@@ -49,10 +45,9 @@ export default function CreateReminderScreen({ navigation }: any) {
         return;
       }
 
-      // Adicionar lembrete
       add({
         title,
-        date: parsedDate.toISOString(), 
+        date: date.toISOString(),
         category,
         notes,
         done: false,
@@ -85,12 +80,17 @@ export default function CreateReminderScreen({ navigation }: any) {
         />
 
         <Text style={styles.label}>Data e Hora</Text>
-        <TextInput
-          placeholder="Ex: 21/10/2025 09:00"
-          value={date}
-          onChangeText={setDate}
-          style={styles.input}
-        />
+        <TouchableOpacity style={styles.input} onPress={showDateTimePicker}>
+          <Text>{date.toLocaleString()}</Text>
+        </TouchableOpacity>
+        {showPicker && (
+          <DateTimePicker
+            value={date}
+            mode="datetime"
+            display="default"
+            onChange={onChangeDate}
+          />
+        )}
 
         <Text style={styles.label}>Categoria</Text>
         <TextInput
@@ -139,17 +139,8 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     borderWidth: 1,
     borderColor: "#DDD",
+    justifyContent: "center",
   },
-  btn: {
-    backgroundColor: "#125C0B",
-    paddingVertical: 14,
-    borderRadius: 10,
-    marginTop: 10,
-  },
-  btnText: {
-    color: "#fff",
-    fontSize: 16,
-    fontWeight: "700",
-    textAlign: "center",
-  },
+  btn: { backgroundColor: "#125C0B", paddingVertical: 14, borderRadius: 10, marginTop: 10 },
+  btnText: { color: "#fff", fontSize: 16, fontWeight: "700", textAlign: "center" },
 });
