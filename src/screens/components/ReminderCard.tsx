@@ -11,12 +11,19 @@ type Props = {
 };
 
 export default function ReminderCard({ item, onToggle, onEdit, onRemove }: Props) {
+  let displayDate = "";
+  try {
+    displayDate = item.date ? format(new Date(item.date), 'dd/MM/yyyy HH:mm') : '';
+  } catch {
+    displayDate = "Data inválida";
+  }
+
   return (
     <View style={[styles.card, item.done && styles.done]}>
       <View style={[styles.leftBar, { backgroundColor: colorByCategory(item.category) }]} />
       <View style={styles.body}>
         <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.date}>{format(new Date(item.date), 'dd/MM/yyyy HH:mm')}</Text>
+        <Text style={styles.date}>{displayDate}</Text>
       </View>
       <View style={styles.actions}>
         <TouchableOpacity onPress={() => onToggle(item.id)} style={styles.actionBtn}>

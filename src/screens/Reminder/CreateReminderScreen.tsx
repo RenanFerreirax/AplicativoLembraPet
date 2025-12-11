@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Alert,
 } from "react-native";
 import { useReminders } from "../contexts/RemindersContext";
 import { Category } from "../../types";
@@ -28,6 +29,13 @@ export default function CreateReminderScreen({ navigation }: any) {
         return;
       }
 
+      // Validar formato da data
+      const parsedDate = new Date(date);
+      if (isNaN(parsedDate.getTime())) {
+        alert("Data inválida. Use o formato: dd/MM/yyyy HH:mm");
+        return;
+      }
+
       // Validar categoria
       const validCategories: Category[] = ["general", "vacina", "banho", "passeio"];
       if (!validCategories.includes(category)) {
@@ -35,33 +43,30 @@ export default function CreateReminderScreen({ navigation }: any) {
         return;
       }
 
-      if (!add || typeof add !== "function") {
-        console.error("Função add não encontrada no contexto de lembretes.");
-        alert("Erro interno ao salvar o lembrete.");
+      if (!add) {
+        alert("Erro: função de adicionar lembrete não encontrada");
+        console.error("add function não existe em useReminders()");
         return;
       }
 
       // Adicionar lembrete
       add({
         title,
-        date,
+        date: parsedDate.toISOString(), 
         category,
         notes,
         done: false,
       });
 
-      if (navigation && typeof navigation.goBack === "function") {
-        navigation.goBack();
-      }
+      navigation.goBack();
     } catch (error) {
       console.error("Erro ao salvar lembrete:", error);
-      alert("Ocorreu um erro ao salvar o lembrete.");
+      alert("Ocorreu um erro ao salvar o lembrete");
     }
   };
 
   return (
     <View style={styles.container}>
-      {/* Topo */}
       <View style={styles.topbar}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.back}>←</Text>
@@ -70,7 +75,6 @@ export default function CreateReminderScreen({ navigation }: any) {
         <View style={{ width: 20 }} />
       </View>
 
-      {/* Conteúdo */}
       <View style={styles.content}>
         <Text style={styles.label}>Título</Text>
         <TextInput
@@ -90,7 +94,7 @@ export default function CreateReminderScreen({ navigation }: any) {
 
         <Text style={styles.label}>Categoria</Text>
         <TextInput
-          placeholder="vacina, banho, passeio..."
+          placeholder="general, vacina, banho, passeio"
           value={category}
           onChangeText={(text) => setCategory(text as Category)}
           style={styles.input}
