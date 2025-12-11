@@ -5,19 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App LembraPet - Apresentação</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; }
-        h1 { color: #4CAF50; }
-        h2 { color: #333; margin-top: 30px; }
-        p { color: #555; line-height: 1.5; }
-        img { max-width: 100%; margin: 10px 0; border-radius: 10px; }
-        .qr { width: 200px; height: 200px; margin: 10px 0; }
-        .section { margin-bottom: 40px; }
-        a { color: #4CAF50; text-decoration: none; font-weight: bold; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
-        tfoot th { background-color: #4CAF50; color: #fff; }
-        .print-img { max-width: 250px; border-radius: 20px; margin: 10px 0; }
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+        h2 {
+            color: #125C0B;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 4px;
+        }
+        .section {
+            margin-bottom: 50px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .app-print {
+            width: 320px;
+            max-width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            margin: 10px 10px 10px 0;
+        }
+        .prints-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .qr {
+            width: 250px;
+            height: 250px;
+            margin: 15px 0;
+        }
+        a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        p {
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -25,78 +58,45 @@
 
     <div class="section">
         <h2>Descrição do Projeto</h2>
-        <p>O LembraPet é um aplicativo mobile desenvolvido em <strong>React Native</strong> que ajuda usuários a gerenciar rotinas de cuidados com seus pets, enviando lembretes de vacinas, passeios, banhos e outros cuidados importantes.</p>
-        <p>O projeto integra funcionalidades como criação de lembretes, histórico de atividades e marcação de tarefas concluídas, tudo funcionando localmente com dados mock, garantindo uma experiência simples, intuitiva e confiável.</p>
-    </div>
-
-    <div class="section">
-        <h2>Objetivo</h2>
-        <p>Criar um aplicativo mobile intuitivo que:</p>
+        <p>O LembraPet é um aplicativo mobile desenvolvido em <strong>React Native</strong> que ajuda usuários a lembrar de vacinas, consultas e cuidados com seus pets. Com ele, é possível:</p>
         <ul>
-            <li>Melhore a organização das rotinas dos donos de pets.</li>
-            <li>Garanta que nenhum cuidado seja esquecido.</li>
-            <li>Ofereça integração futura com backend seguro e escalável.</li>
+            <li>Criar lembretes para vacinas, banho, passeio e outros cuidados.</li>
+            <li>Visualizar lembretes existentes.</li>
+            <li>Marcar lembretes como concluídos.</li>
         </ul>
+        <p>O app funciona localmente usando dados mock, sem necessidade de backend para a apresentação.</p>
     </div>
 
     <div class="section">
         <h2>Prints da Aplicação</h2>
-        <img class="print-img" src="prints/tela-inicial.PNG" alt="Tela Inicial com lembretes">
-        <img class="print-img" src="prints/tela-de-criar-lembrete.PNG" alt="Tela de Criar Lembrete">
+        <div class="prints-container">
+            <img class="app-print" src="prints/tela-inicial.PNG" alt="Tela Inicial com lembretes">
+            <img class="app-print" src="prints/tela-de-criar-lembrete.PNG" alt="Tela de Criar Lembrete">
+        </div>
     </div>
 
     <div class="section">
         <h2>Download Android</h2>
-        <p>Baixe o APK do app LembraPet:</p>
-        <img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://expo.dev/artifacts/eas/4Mun9qHXbfhjdZzSJKtwqk.apk" alt="QR Code Android">
+        <p>Baixe o APK do app LembraPet diretamente ou escaneie o QR code:</p>
+        <img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://expo.dev/artifacts/eas/4Mun9qHXbfhjdZzSJKtwqk.apk" alt="QR Code Android">
         <p><a href="https://expo.dev/artifacts/eas/4Mun9qHXbfhjdZzSJKtwqk.apk" target="_blank">Clique aqui para baixar o APK</a></p>
     </div>
 
     <div class="section">
         <h2>Executar no iOS (Expo)</h2>
-        <p>Abra o app Expo Go e escaneie o QR code abaixo:</p>
-        <img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://expo.dev/@kuma345/lembrapet" alt="QR Code iOS">
+        <p>Abra no app <strong>Expo Go</strong> e escaneie o QR code abaixo:</p>
+        <img class="qr" src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://expo.dev/@kuma345/lembrapet" alt="QR Code iOS">
         <p><a href="https://expo.dev/@kuma345/lembrapet" target="_blank">Abrir no Expo</a></p>
     </div>
 
     <div class="section">
-        <h2>Orçamento Resumido</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Descrição</th>
-                    <th>Qtd</th>
-                    <th>Preço Unitário</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Desenvolvimento (6 meses)</td>
-                    <td>1</td>
-                    <td>R$ 21 mil</td>
-                    <td>R$ 21 mil</td>
-                </tr>
-                <tr>
-                    <td>Infraestrutura / Ferramentas</td>
-                    <td>-</td>
-                    <td>R$ 1 mil</td>
-                    <td>R$ 1 mil</td>
-                </tr>
-                <tr>
-                    <td>Testes e Documentação</td>
-                    <td>-</td>
-                    <td>Incluso</td>
-                    <td>-</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th colspan="3">Total Geral</th>
-                    <th>R$ 22 mil</th>
-                </tr>
-            </tfoot>
-        </table>
+        <h2>Resumo do Projeto Integrador</h2>
+        <p>O LembraPet é uma solução prática para auxiliar donos de pets na rotina diária, enviando lembretes de vacinas, banho, passeios e cuidados essenciais.</p>
+        <ul>
+            <li><strong>Objetivo:</strong> Criar um aplicativo mobile intuitivo que organize a rotina dos donos de pets e garanta que nenhum cuidado seja esquecido.</li>
+            <li><strong>Duração do desenvolvimento:</strong> 6 meses</li>
+            <li><strong>Valor total estimado:</strong> R$ 22.000,00</li>
+        </ul>
     </div>
 </body>
 </html>
